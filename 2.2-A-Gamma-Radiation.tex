@@ -1,0 +1,175 @@
+% Klassifiziert den Dokumenten-Typ
+% Doku: http://exp1.fkp.physik.tu-darmstadt.de/tuddesign/
+% Farben: http://www.tu-darmstadt.de/media/medien_stabsstelle_km/services/medien_cd/das_bild_der_tu_darmstadt.pdf
+%  bigchapter: Chapter haben doppelte Schriftgröße
+%  linedtoc: Linien im Inhaltsverzeichnis wie bei Überschriften
+%  colorbacktitle: Der Dokumenten-Titel wird mir der Accentfarbe hinterlegt
+\documentclass[bigchapter,colorback,accentcolor=tud4b,linedtoc,11pt]{tudreport}
+
+% Input Dokument hat das Encoding UTF-8
+\usepackage[utf8]{inputenc}
+% Wichtiges Paket für Links und verlinktes Inhaltsverzeichnis
+\usepackage[ngerman]{hyperref}
+% Paket für Fußnoten
+\usepackage[stable]{footmisc}
+\usepackage{multirow}
+\usepackage{colortbl}
+% Alternatives package für bilder
+\usepackage{wrapfig}
+% Paket für amsmath (aligned mathe formeln)
+\usepackage{amsmath}
+% Farbige tabellen
+\usepackage{colortbl}
+ 
+% Paket für Bibliotheks-Verzeichnis, square: Verwende eckige statt runde klammern
+% \usepackage[square]{natbib}
+% Paket zum Plotten von Datensätzen
+\usepackage{pgfplots}
+\pgfkeys{%
+  /pgfplots/default/.style={%
+    /pgf/number format/use comma,
+    legend pos=north east,
+    x tick label style={/pgf/number format/1000 sep=},
+    y tick label style={/pgf/number format/1000 sep=},
+    width=0.9\linewidth,
+    height=0.40\linewidth,
+    scale only axis,
+    grid=both,
+    tick align=outside,
+    tickpos=minor,
+    left X tick num=3,
+    minor y tick num=4,
+    minor grid style={dotted,thin}
+  }
+}
+
+% Anhänge für Original-Messdaten
+\usepackage{fancyvrb}
+
+% Verwende deutsche Bezeichner für Inhaltsverzeichnis, ... (ngerman = New German: neue Rechtschreibung)
+\usepackage{ngerman}
+% Deutsche Zahlen (entfernt z.B. das Leerzeichen nach einem Dezimal-Komma)
+\usepackage{ziffer} 
+
+\usepackage[verbose]{placeins}
+
+%wegen Grafikverschiebung hinzugefügt
+\usepackage{float}
+
+%\usepackage{graphicx}
+%\usepackage{caption}
+\usepackage{subcaption} %Für subfigures
+
+% PDF-Optionen
+\hypersetup{%
+  pdftitle={TU Darmstadt \- Physikalisches Praktikum für Fortgeschrittene},
+  pdfauthor={Esra Bauer, Sören Link},
+  pdfsubject={Versuch 2.2-A},
+  pdfview=FitH,
+}
+% Nummeriere formeln in Subsections einzeln
+% Kleines makro zur assymetrischen Fehlerangabe
+
+% Entspricht-Zeichen
+\usepackage{scalerel}
+
+\newcommand\equalhat{%
+\let\savearraystretch\arraystretch
+\renewcommand\arraystretch{0.3}
+\begin{array}{c}
+\stretchto{
+    \scalerel*[\widthof{=}]{\wedge}
+    {\rule{1ex}{3ex}}%
+}{0.5ex}\\ 
+=%
+\end{array}
+\let\arraystretch\savearraystretch
+}
+%BEGINN TITELSEITE
+
+\title{Interaction of $\gamma$-Radiation with Matter}
+
+\subtitle{Esra Bauer  \\Sören Link}
+
+\subsubtitle{Tutor: Haridas Pai \hfill 4/27/2015}
+
+\author{Esra Bauer, Sören Link, Christian Hoch}
+
+%\settitlepicture{img/title.jpg}
+
+\institution{Physikalisches Praktikum \\für Fortgeschrittene \\ Versuch 2.2-A}
+
+\date{\today}
+%ENDE TITELSEITE
+
+
+\begin{document}
+%ANFANG DOKUMENT
+
+%Titelseite einfügen
+\maketitle
+
+%Inhaltsverzeichnis einfügen
+\tableofcontents
+
+%ANFANG INHALT
+\chapter{Introduction}
+
+
+
+\chapter{Theoretical Background}
+
+
+\section{Radioactice Decay}
+
+\section{Interaction of $\gamma$-rays with Matter}
+
+\section{Scintillation Spectroscopy}
+
+
+\chapter{Experimental Setup and Execution}
+
+\section{Setup}
+
+\section{Execution}
+
+\chapter{Evaluation}
+\section{Analysis of spectrum of $^{137}Cs$}
+\subsection{Energy-calibration}
+\subsection{Energy spectrum}
+\subsection{Backscattering peak}
+\subsection{Abosrption by a lead plate}
+\subsection{Convection coefficient}
+
+\section{Analysis of spectrum of $^{22}Na$}
+\subsection{Energy-calibration}
+\subsection{Energy spectrum}
+\subsection{Probability of sumpeaks}
+\subsection{$\beta^+$-branching ratio}
+\subsection{Multiple event process}
+
+\section{Energy Resolution}
+
+\section{Background Radiation}
+
+\chapter{Conclusion}
+
+%ENDE INHALT
+\cleardoublepage{}
+% Eintrag fürs Inhaltsverzeichnis
+\newpage
+\begin{thebibliography}{100}
+  \bibitem{Anleitung} {Experimental Instructions}
+  \bibitem{na22decay} {Semibyte, homepage of physics lab assistent and qualified
+      computer scientist Tobias Krähling:
+      \url{http://www.semibyte.de/wp/download/graphicslib/physics/termschema_na22.png}
+    [CC BY-NC-SA 3.0]}
+  \bibitem{cs137decay} {Wikipedia, the free encyclopedia By Tubas-en [Public
+      domain], via Wikimedia Commons: \url{http://commons.wikimedia.org/wiki/File%3ACs-137-decay.svg}}
+\end{thebibliography}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

@@ -114,24 +114,82 @@
 
 %ANFANG INHALT
 \chapter{Introduction}
-
-
+In this experiment we analyze the radioactive Isotopes $^{22}Na$ and
+$^{137}Cs$. This includes determining the convection coefficient $\alpha_K$ of
+$^{137}Cs$ and the $\beta^+$ branching coefficient of $^{22}Na$.
 
 \chapter{Theoretical Background}
-
-
 \section{Radioactice Decay}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[H]{0.44\textwidth}
+        \includegraphics[width=\textwidth]{img/termschema_na22.png}
+        \caption{Decay scheme of $^{22}Na$ \cite{na22decay}.}
+        \label{fig:gull}
+    \end{subfigure}%
+    \qquad
+    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+        %(or a blank line to force the subfigure onto a new line)
+    \begin{subfigure}[H]{0.44\textwidth}
+        \includegraphics[width=\textwidth]{img/Cs-137-decay.png}
+        \caption{Decay scheme of $^{22}Na$ \cite{cs137decay}.}
+        \label{fig:tiger}
+    \end{subfigure}
+    \caption{Decay scheme of the radiactive isotopes used in this experiment.}
+\end{figure}
 
 \section{Interaction of $\gamma$-rays with Matter}
+The interaction of $\gamma$-rays with matter consists of a superposition
+of three different effects. At low photon energies their interaction with matter
+is dominated by the photoelectric effect where photons are completely absorbed
+by electrons. Bound electrons that absorb a photon in this way are broken free
+from their atom, creating an electric current.
+
+Photons with energies in orders of magnitudes ranging from $10^2 keV$ to $10^3 keV$
+mostly interact through elastic scattering with weakly bound electrons. This
+results in a transfer of energy from the photon to the electron and is called
+the Comtpon effect.
+
+Above energies of $1022keV$ photons traveling in a strong coloumb field can
+spontanously convert into an electron and a positron. In doing so the photon
+ceases to exists and converts it's energy first into the mass of the $e^-$ and
+$e^+$ particle. The remaining energy is then being transferred onto these
+particles in the form of kinetic energy. Because the impulse has to be conserved
+during this conversion, the effect most often occurs near the nucleus, which can
+absorb the impulse of the incident photon. This effect is called pair production
+and the likelyhood of it occuring increases with higher photon energies.
+
+
 
 \section{Scintillation Spectroscopy}
 
 
 \chapter{Experimental Setup and Execution}
+\begin{figure}[H] 
+  \centering
+     \includegraphics[width=0.8\textwidth]{img/aufbau.png}
+     \caption{Experimental setup. As source material we used $^{22}Na$ and
+       $^{137}Cs$. In addition we mounted plates of aluminium, cadmium, iron and
+     lead behind the source to measure the backscatter radiation. Finally we have
+     also measured the background radiation without a radiactive source \cite{Anleitung}.}
+  \label{fig:aufbau}
+\end{figure}
 
-\section{Setup}
+The experimental setup remains mostly constant throughout the experiment. First
+we measured the radioactive spectrum of $^{137}Cs$ with a distance $h$ from the
+detecter of $10 cm$. During these measurements
+we mounted plates of aluminium, cadmium, iron and lead behind the source to
+determine their effect on the spectrum. We've also measured the spectrum of
+$^{137}Cs$ through a lead shield.
 
-\section{Execution}
+Afterwards we replaced the caesium isotope with radioactive $^{22}Na$ and
+measured it's spectrum twice. The first measurement was done with the natrium
+sample mounted $10 cm$ above the scintillation detector. For the second
+measurment we put the sample directly on top of the detector.
+
+Each measurement concluded when the main peak of the spectrum reached $3000$ counts.
+
+In the end we measured the background radiation for 31 minutes and 40 seconds.
 
 \chapter{Evaluation}
 \section{Analysis of spectrum of $^{137}Cs$}
@@ -164,8 +222,8 @@
       computer scientist Tobias Krähling:
       \url{http://www.semibyte.de/wp/download/graphicslib/physics/termschema_na22.png}
     [CC BY-NC-SA 3.0]}
-  \bibitem{cs137decay} {Wikipedia, the free encyclopedia By Tubas-en [Public
-      domain], via Wikimedia Commons: \url{http://commons.wikimedia.org/wiki/File%3ACs-137-decay.svg}}
+  \bibitem{cs137decay} {Wikipedia, the free encyclopedia. By Tubas-en [Public
+      domain], via Wikimedia Commons: \url{http://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Cs-137-decay.svg/500px-Cs-137-decay.svg.png}}
 \end{thebibliography}
 \end{document}
 

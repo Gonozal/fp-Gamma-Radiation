@@ -26,6 +26,9 @@
 % Paket zum Plotten von Datensätzen
 \usepackage{pgfplots}
 \pgfkeys{%
+  /pgfplots/seperators/.style={%
+    /pgf/number format/use comma
+  },
   /pgfplots/default/.style={%
     /pgf/number format/use comma,
     legend pos=north east,
@@ -36,8 +39,7 @@
     scale only axis,
     grid=both,
     tick align=outside,
-    tickpos=minor,
-    left X tick num=3,
+    minor x tick num=3,
     minor y tick num=4,
     minor grid style={dotted,thin}
   }
@@ -210,6 +212,25 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
 \chapter{Evaluation}
 \section{Analysis of spectrum of $^{137}Cs$}
 \subsection{Energy-calibration}
+\begin{center}
+\begin{figure}[H]
+    \begin{tikzpicture}
+    \begin{axis}[
+        title={Background Radiation},
+        xlabel=channel,
+        ylabel=counts,
+        height=0.7\textwidth,
+        ymin=0,
+        xmin=0,
+        xmax=650,
+        default
+    ]
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/background.txt};
+    \end{axis}
+    \end{tikzpicture}
+    \captionof{figure}{}
+\end{figure}
+\end{center}
 \subsection{Energy spectrum}
 \subsection{Backscattering peak}
 \subsection{Abosrption by a lead plate}
@@ -217,6 +238,7 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
 
 \section{Analysis of spectrum of $^{22}Na$}
 \subsection{Energy-calibration}
+
 \subsection{Energy spectrum}
 \subsection{Probability of sumpeaks}
 \subsection{$\beta^+$-branching ratio}
@@ -226,6 +248,26 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
 
 \section{Background Radiation}
 
+\begin{center}
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{axis}[
+    title={Background Radiation},
+    xlabel=channel,
+    ylabel=counts,
+    height=0.7\textwidth,
+    ymin=0,
+    xmin=0,
+    xmax=650,
+    default
+]
+\addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/background.txt};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{}
+\end{figure}
+\end{center}
+
 \chapter{Conclusion}
 
 %ENDE INHALT
@@ -233,8 +275,7 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
 % Eintrag fürs Inhaltsverzeichnis
 \newpage
 \begin{thebibliography}{100}
-  \bibitem{Anleitung} {Experimental Instructions}
-  \bibitem{na22decay} {Semibyte, homepage of physics lab assistent and qualified
+  \bibitem{Anleitung} {Experimental Instructions} \bibitem{na22decay} {Semibyte, homepage of physics lab assistent and qualified
       computer scientist Tobias Krähling:
       \url{http://www.semibyte.de/wp/download/graphicslib/physics/termschema_na22.png}
     [CC BY-NC-SA 3.0]}

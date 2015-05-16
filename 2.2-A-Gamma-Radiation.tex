@@ -125,9 +125,9 @@ $^{137}Cs$ and the $\beta^+$ branching coefficient of $^{22}Na$.
 \chapter{Theoretical Background}
 \section{Radioactice Decay}
 
-Additionally to the well known $\alpha$, $\beta^{\pm}$ and $\gamma$ decay there are two other radioactive decay types which are important for us. First we have electron capture which gives the same progeny as $\beta^+$ decay. The nucleus absorbs an inner atomic electron whereby a proton is converted into a neutron and an electron neutrino. Released energy is given to the neutrino as kinetic energy resp. the progeny stays in an excited state if energy is left over. Because the missing electron is replaced by other atomic electrons there is spontaneous X-ray emission.
+Additionally to the well known $\alpha$, $\beta^{\pm}$ and $\gamma$ decay there are two other radioactive decay types which are important for us. First we have electron capture which gives the same progeny as $\beta^+$ decay. The nucleus absorbs an inner atomic electron whereby a proton is converted into a neutron and an electron neutrino. Released energy is given to the neutrino as kinetic energy resp.\ the progeny stays in an excited state if energy is left over. Because the missing electron is replaced by other atomic electrons there is spontaneous X-ray emission.
 
-Second there is the inner conversion as an alternative to $\gamma$ decay. Via direct elektromagnetic interaction energy is transferred from the nucleus to an atomic electron. The nucleus switches into an lower state and the electron is emitted i.e. the atom is ionized. As a characteristic number we define the conversion rate as follows
+Second there is the inner conversion as an alternative to $\gamma$ decay. Via direct elektromagnetic interaction energy is transferred from the nucleus to an atomic electron. The nucleus switches into an lower state and the electron is emitted i.e.\ the atom is ionized. As a characteristic number we define the conversion rate as follows
 
 $$\alpha = \frac{N_{e^-}}{N_{\gamma}}$$
 
@@ -143,7 +143,7 @@ Below we see the decay schemes of the used Isotopes:
         \label{fig:gull}
     \end{subfigure}%
     \qquad
-    ~ %add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
+    ~%add desired spacing between images, e. g. ~, \quad, \qquad, \hfill etc.
         %(or a blank line to force the subfigure onto a new line)
     \begin{subfigure}[H]{0.44\textwidth}
         \includegraphics[width=\textwidth]{img/Cs-137-decay.png}
@@ -160,7 +160,7 @@ is dominated by the photoelectric effect where photons are completely absorbed
 by electrons. Bound electrons that absorb a photon in this way are broken free
 from their atom, creating an electric current.
 
-Photons with energies in orders of magnitudes ranging from $10^2 keV$ to $10^3 keV$
+Photons with energies in orders of magnitudes ranging from $10^2$ $keV$ to $10^3$ $keV$
 mostly interact through elastic scattering with weakly bound electrons. This
 results in a transfer of energy from the photon to the electron and is called
 the Comtpon effect.
@@ -180,7 +180,7 @@ and the likelyhood of it occuring increases with higher photon energies.
 
 Because gamma-ray sources produce characteristic spectra with discrete lines it can be used for spectroscopy. We use a scintillation detector which operates as follows. Gamma-rays hit a thallium-doped sodium iodide (NaI) crystal which produces in consequence intense bursts of light. Those flashes unleash electrons at a photocathode which are subsequently multiplied in a photomultiplier tube. This results in an electrical pulse containing meaningful information about the particle that originally hit the detector.
 
-Characteristic numbers for such an detector are the energy resolution and the sensitivity. Energy resolution means the smallest distance between two peaks that can still be identyfied as separate. Due to the high density scintillator its energy resolution is quite good resp. better than the resolution of a Geiger-müller counter but not good as that of an semiconductor detector. The sensitivity is defined as the probability for the detection of a particle. Especially in case of inorganic scintillation crystals as used in this experiment, the sensitivity for charged particles is very high due to the use of the phomultiplier tube.
+Characteristic numbers for such an detector are the energy resolution and the sensitivity. Energy resolution means the smallest distance between two peaks that can still be identyfied as separate. Due to the high density scintillator its energy resolution is quite good resp.\ better than the resolution of a Geiger-müller counter but not good as that of an semiconductor detector. The sensitivity is defined as the probability for the detection of a particle. Especially in case of inorganic scintillation crystals as used in this experiment, the sensitivity for charged particles is very high due to the use of the phomultiplier tube.
 
 The pulse height spectrum is the distribution of various pulse strenghts (heights) developed while recording the gamma-ray spectrum. The pulse heights are digitized and saved in channels for later spectral analysis.
 
@@ -212,7 +212,7 @@ Each measurement concluded when the main peak of the spectrum reached $3000$ cou
 In the end we measured the background radiation for 31 minutes and 40 seconds.
 
 \chapter{Evaluation}
-\section{Analysis of spectrum of $^{137}Cs$}
+\section{Analysis of the spectrum of $^{137}Cs$}
 \subsection{Energy-calibration}
 \begin{center}
 \begin{figure}[H]
@@ -227,19 +227,35 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
         xmax=320,
         default
     ]
-    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-1.txt};
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-1-no-bg.txt};
+    \addplot[green, mark=x, mark size=0pt, samples=100, domain=-60:115] {1850.15*e^(-0.037403*(-90.6604+x)^2)};
+    \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270] {4367.33*e^(-0.00790729*(-232.226+x)^2)};
     \end{axis}
     \end{tikzpicture}
     \captionof{figure}{}
 \end{figure}
 \end{center}
+
+\subsubsection{Fit Values}
+
+$$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \sigma ^2}}$$
+
+\begin{center}
+  \begin{tabular}{r|l|l|l}
+           & k         & $\mu$     & $\sigma$  \\ \hline
+     xray  & $16956,2$ & $90,6604$ & $3,65621$ \\ \hline
+     gamma & $87051,7$ & $232,226$ & $7,9519$ \\
+	\end{tabular}
+\end{center}
+
 \subsection{Energy spectrum}
+
 \subsection{Backscattering peak}
 \begin{center}
 \begin{figure}[H]
     \begin{tikzpicture}
     \begin{axis}[
-        title={$^{22}Na$ Spectrum},
+        title={$^{137}Cs$ Spectrum},
         xlabel=channel,
         ylabel=counts,
         height=0.7\textwidth,
@@ -249,13 +265,13 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
         default,
         legend pos=north west
     ]
-    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-AL-backscattering.txt};
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-AL-backscattering-no-bg.txt};
     \addlegendentry{Aluminium Plate}
-    \addplot[green, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Cd-backscattering.txt};
+    \addplot[green, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Cd-backscattering-no-bg.txt};
     \addlegendentry{Cadmium Plate}
-    \addplot[blue, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Fe-backscattering.txt};
+    \addplot[blue, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Fe-backscattering-no-bg.txt};
     \addlegendentry{Iron Plate}
-    \addplot[orange, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Pb-backscattering.txt};
+    \addplot[orange, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Pb-backscattering-no-bg.txt};
     \addlegendentry{Lead Plate}
     \end{axis}
     \end{tikzpicture}
@@ -267,7 +283,7 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
 \begin{figure}[H]
     \begin{tikzpicture}
     \begin{axis}[
-        title={$^{22}Na$ Spectrum},
+        title={$^{137}Cs$ Spectrum},
         xlabel=channel,
         ylabel=counts,
         height=0.7\textwidth,
@@ -277,8 +293,8 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
         default,
         legend pos=north west
     ]
-    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Pb-shield.txt};
-    \addlegendentry{Aluminium Plate}
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Pb-shield-no-bg.txt};
+    \addlegendentry{Lead Plate}
     \end{axis}
     \end{tikzpicture}
     \captionof{figure}{}
@@ -286,7 +302,7 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
 \end{center}
 \subsection{Convection coefficient}
 
-\section{Analysis of spectrum of $^{22}Na$}
+\section{Analysis of the spectrum of $^{22}Na$}
 \subsection{Energy-calibration}
 \begin{center}
 \begin{figure}[H]
@@ -302,33 +318,65 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
         default
     ]
     \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22.txt};
+    \addplot[green, mark=x, mark size=0pt, samples=100, domain=-60:115] {2401.28*e^(-0.00245762*(-108.445+x)^2)};
+    \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270] {963.17*e^(-0.0180637*(-235.828+x)^2)};
     \end{axis}
     \end{tikzpicture}
     \captionof{figure}{}
 \end{figure}
 \end{center}
 
+\subsubsection{Fit Values}
+\begin{center}
+  \begin{tabular}{r|r@{,}l|r@{,}l|r@{,}l}
+           & \multicolumn{2}{c|}{k}         & \multicolumn{2}{c|}{$\mu$}     & \multicolumn{2}{c}{$\sigma$}  \\ \hline
+     xray  & $85853$ &$9$ & $108$&$445$ & $14$&$2635$ \\ \hline
+     gamma & $12702$ &$1$ & $235$&$828$ & $5$&$26116$ \\
+	\end{tabular}
+\end{center}
+
+
 \subsection{Energy spectrum}
 \subsection{Probability of sumpeaks}
-\begin{center}
 \begin{figure}[H]
-    \begin{tikzpicture}
-    \begin{axis}[
-        title={$^{22}Na$ Spectrum},
-        xlabel=channel,
-        ylabel=counts,
-        height=0.7\textwidth,
-        ymin=0,
-        xmin=0,
-        xmax=400,
-        default
-    ]
-    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-sum.txt};
-    \end{axis}
-    \end{tikzpicture}
-    \captionof{figure}{}
+\begin{tikzpicture}
+\begin{axis}[
+  default,
+  width=0.48\linewidth,
+  title={$^{22}Na$ Spectrum},
+  xlabel=channel,
+  ylabel=counts,
+  height=0.3\linewidth,
+  ymin=0,
+  xmin=50,
+  xmax=350,
+  name=first
+]
+    \addplot[blue, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg.txt};
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-sum-no-bg.txt};
+
+\end{axis}
+
+\begin{axis}[
+  default,
+  width=0.28\linewidth,
+  title={$^{22}Na$ Spectrum},
+  xlabel=channel,
+  ylabel=counts,
+  height=0.3\linewidth,
+  ymin=0,
+  xmin=280,
+  xmax=320,
+  name=second,
+  at=(first.outer south east),
+  anchor=outer south west
+]
+    \addplot[blue, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg.txt};
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-sum-no-bg.txt};
+\end{axis}
+\end{tikzpicture}
+\captionof{figure}{}
 \end{figure}
-\end{center}
 \subsection{$\beta^+$-branching ratio}
 \subsection{Multiple event process}
 

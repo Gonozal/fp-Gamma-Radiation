@@ -1,0 +1,253 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     10140,        244]
+NotebookOptionsPosition[      9698,        224]
+NotebookOutlinePosition[     10053,        240]
+CellTagsIndexPosition[     10010,        237]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Clear", " ", "unused", " ", "stuff"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"Clear", "[", " ", 
+     RowBox[{
+     "Filename", ",", " ", "Filepath", ",", " ", "rawBackground", ",", " ", 
+      "rawData", ",", " ", "BackgroundTime", ",", " ", "DataTime", ",", " ", 
+      "removeBackground"}], "]"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Specify", " ", "folder", " ", "structure", " ", "and", " ", 
+     "filenames"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"BackgroundFile", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<../data/\>\"", " ", 
+      "<>", " ", "\"\<background.Spe\>\""}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Filename", " ", "=", " ", "\"\<Cs137-1\>\""}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Filepath", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], "<>", "\"\<../data/\>\""}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Import", " ", "raw", " ", "data", " ", 
+     RowBox[{"from", " ", ".", "Spe"}], " ", "files"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"rawBackground", " ", "=", " ", 
+     RowBox[{"Import", "[", 
+      RowBox[{"BackgroundFile", ",", " ", "\"\<Table\>\""}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"rawData", " ", "=", " ", 
+     RowBox[{"Import", "[", 
+      RowBox[{
+       RowBox[{"Filepath", "<>", " ", "Filename", " ", "<>", "\"\<.Spe\>\""}],
+        ",", " ", "\"\<Table\>\""}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Get", " ", "measurement", " ", "times", " ", "and", " ", 
+     RowBox[{"calc", ".", " ", "time"}], " ", "fraction", " ", "between", " ",
+      "measurement", " ", "and", " ", "background"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"BackgroundTime", " ", "=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Take", "[", 
+        RowBox[{"rawBackground", ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"10", ",", "10"}], "}"}]}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "[", 
+      RowBox[{"[", "2", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"DataTime", " ", "=", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Take", "[", 
+        RowBox[{"rawData", ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"10", ",", "10"}], "}"}]}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}], "[", 
+      RowBox[{"[", "2", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"TimeFraction", " ", "=", " ", 
+    RowBox[{"DataTime", " ", "/", " ", "BackgroundTime"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "remove", " ", "unused", " ", "lines", " ", "and", " ", "background", " ",
+      "influence", " ", "from", " ", "measurements"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"cutBackground", " ", "=", " ", 
+     RowBox[{"Take", "[", 
+      RowBox[{
+       RowBox[{"Drop", "[", 
+        RowBox[{
+         RowBox[{"Drop", "[", 
+          RowBox[{"rawBackground", ",", " ", "12"}], "]"}], ",", 
+         RowBox[{"-", "14"}]}], "]"}], ",", "1000"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"cutData", " ", "=", " ", 
+     RowBox[{"Take", "[", 
+      RowBox[{
+       RowBox[{"Drop", "[", 
+        RowBox[{
+         RowBox[{"Drop", "[", 
+          RowBox[{"rawData", ",", " ", "12"}], "]"}], ",", 
+         RowBox[{"-", "14"}]}], "]"}], ",", "1000"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"removeBackground", "[", 
+     RowBox[{"a_", ",", " ", "b_"}], "]"}], " ", ":=", " ", 
+    RowBox[{"Round", "[", 
+     RowBox[{
+      RowBox[{"a", " ", "-", " ", 
+       RowBox[{"TimeFraction", " ", "*", " ", "b"}]}], ",", "1"}], "]"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"removedBackground", " ", "=", " ", 
+     RowBox[{
+      RowBox[{"MapThread", "[", 
+       RowBox[{"removeBackground", ",", 
+        RowBox[{"{", 
+         RowBox[{"cutData", ",", " ", "cutBackground"}], "}"}]}], "]"}], "[", 
+      
+      RowBox[{"[", 
+       RowBox[{"All", ",", " ", "1"}], "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Add", " ", "channel", " ", "numbers", " ", "to", " ", "counts", " ", 
+     "and", " ", "export", " ", "as", " ", "txt"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"removedBackground", " ", "=", " ", 
+     RowBox[{"MapIndexed", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"First", "[", "#2", "]"}], ",", " ", "#1"}], "}"}], "&"}], 
+       ",", "removedBackground"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   "\n", " ", "\[IndentingNewLine]", 
+   RowBox[{"Export", "[", 
+    RowBox[{
+     RowBox[{
+     "Filepath", "<>", " ", "Filename", " ", "<>", "\"\<-no-bg.txt\>\""}], 
+     ",", " ", "removedBackground", ",", " ", "\"\<Table\>\""}], "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.633685707122654*^9, 3.633685712515729*^9}, {
+   3.6336857444515657`*^9, 3.633685791845689*^9}, {3.6336859193316793`*^9, 
+   3.6336859668041058`*^9}, {3.633686030510027*^9, 3.6336861123719482`*^9}, {
+   3.6336862187247553`*^9, 3.633686333116564*^9}, 3.633686375770443*^9, {
+   3.6336864190674343`*^9, 3.6336866153307734`*^9}, {3.633686870049405*^9, 
+   3.633686919949745*^9}, {3.633686953134556*^9, 3.6336870159829397`*^9}, {
+   3.633687103806138*^9, 3.633687105317738*^9}, {3.633687144049127*^9, 
+   3.63368722894446*^9}, {3.63368726427732*^9, 3.633687264597143*^9}, {
+   3.633687295684887*^9, 3.6336872961119747`*^9}, {3.6336873282788343`*^9, 
+   3.633687328796475*^9}, {3.6336873588998823`*^9, 3.6336874876361427`*^9}, {
+   3.6337062763687973`*^9, 3.633706310224819*^9}, {3.633706384513176*^9, 
+   3.633706462991405*^9}, {3.633706561743382*^9, 3.633706562194304*^9}, {
+   3.633706613587223*^9, 3.633706760716606*^9}, 3.6337561421187277`*^9, {
+   3.633756236320449*^9, 3.633756295150445*^9}, {3.633756332571669*^9, 
+   3.633756334891781*^9}, {3.633756514815671*^9, 3.633756609220285*^9}, {
+   3.633756761821208*^9, 3.633756824163843*^9}, {3.6337568687671747`*^9, 
+   3.633756870734252*^9}, {3.633756925929294*^9, 3.633756926526443*^9}, {
+   3.633794452716674*^9, 3.633794493803728*^9}, {3.635498474754984*^9, 
+   3.635498502704562*^9}, {3.640757227947916*^9, 3.640757249163525*^9}, {
+   3.640757284520811*^9, 3.6407573623580017`*^9}, {3.640757403160634*^9, 
+   3.640757502020781*^9}, {3.6407575363176527`*^9, 3.640757624064514*^9}, {
+   3.64075766695854*^9, 3.640757689453301*^9}, {3.640757768187656*^9, 
+   3.6407578199035873`*^9}, {3.640757902628936*^9, 3.6407579582633343`*^9}, {
+   3.640758067334958*^9, 3.640758076686933*^9}, {3.640758146290176*^9, 
+   3.64075816203939*^9}, {3.640758209496252*^9, 3.6407582376305237`*^9}, {
+   3.640758342680934*^9, 3.6407583517268*^9}, {3.640758387088475*^9, 
+   3.640758469492145*^9}, {3.6407585837674017`*^9, 3.64075864355473*^9}, {
+   3.640758710876059*^9, 3.640758795446912*^9}, {3.640759005746977*^9, 
+   3.64075906341105*^9}, {3.64075910945131*^9, 3.640759169367464*^9}, {
+   3.640759312462305*^9, 3.640759335640551*^9}, {3.6407594568001537`*^9, 
+   3.640759489573224*^9}, {3.640763154682907*^9, 3.640763155926506*^9}}],
+
+Cell[BoxData[
+ FractionBox["337", "3140"]], "Output",
+ CellChangeTimes->{
+  3.64075740470778*^9, {3.6407574384549437`*^9, 3.6407574485329237`*^9}, {
+   3.6407575816552362`*^9, 3.640757613666553*^9}, {3.640757769567025*^9, 
+   3.640757821238488*^9}, 3.640757961496161*^9, 3.6407580781262913`*^9, 
+   3.64075816357082*^9, 3.6407582388525867`*^9, {3.640758408857833*^9, 
+   3.6407584284715767`*^9}, {3.640758635833549*^9, 3.640758644819634*^9}, {
+   3.640758720023038*^9, 3.640758758887061*^9}, {3.640758790500798*^9, 
+   3.6407587970468283`*^9}, {3.6407593330840483`*^9, 3.640759337125037*^9}, {
+   3.64075945995718*^9, 3.640759490679719*^9}}],
+
+Cell[BoxData["\<\"/Users/soerenlink/Projekte/fp-Gamma-Radiation/mathematica/..\
+/data/Na22-no-bg.txt\"\>"], "Output",
+ CellChangeTimes->{
+  3.64075740470778*^9, {3.6407574384549437`*^9, 3.6407574485329237`*^9}, {
+   3.6407575816552362`*^9, 3.640757613666553*^9}, {3.640757769567025*^9, 
+   3.640757821238488*^9}, 3.640757961496161*^9, 3.6407580781262913`*^9, 
+   3.64075816357082*^9, 3.6407582388525867`*^9, {3.640758408857833*^9, 
+   3.6407584284715767`*^9}, {3.640758635833549*^9, 3.640758644819634*^9}, {
+   3.640758720023038*^9, 3.640758758887061*^9}, {3.640758790500798*^9, 
+   3.6407587970468283`*^9}, {3.6407593330840483`*^9, 3.640759337125037*^9}, {
+   3.64075945995718*^9, 3.640759490757509*^9}}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6337063009257193`*^9, 3.633706301863492*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.633688260326706*^9, 3.6336882603446007`*^9}}]
+},
+WindowSize->{1380, 856},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"9.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (January 25, \
+2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 7557, 169, 539, "Input"],
+Cell[8139, 193, 641, 10, 48, "Output"],
+Cell[8783, 205, 705, 10, 28, "Output"]
+}, Open  ]],
+Cell[9503, 218, 94, 1, 28, "Input"],
+Cell[9600, 221, 94, 1, 28, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -37,6 +37,8 @@
     width=0.9\linewidth,
     height=0.40\linewidth,
     scale only axis,
+    tick align=outside,
+    tickpos=left,
     grid=both,
     tick align=outside,
     minor x tick num=3,
@@ -216,16 +218,16 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
 \begin{figure}[H]
     \begin{tikzpicture}
     \begin{axis}[
-        title={Background Radiation},
+        title={$^{137}Cs$ Spectrum},
         xlabel=channel,
         ylabel=counts,
         height=0.7\textwidth,
         ymin=0,
         xmin=0,
-        xmax=650,
+        xmax=320,
         default
     ]
-    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/background.txt};
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-1.txt};
     \end{axis}
     \end{tikzpicture}
     \captionof{figure}{}
@@ -233,14 +235,100 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
 \end{center}
 \subsection{Energy spectrum}
 \subsection{Backscattering peak}
+\begin{center}
+\begin{figure}[H]
+    \begin{tikzpicture}
+    \begin{axis}[
+        title={$^{22}Na$ Spectrum},
+        xlabel=channel,
+        ylabel=counts,
+        height=0.7\textwidth,
+        ymin=0,
+        xmin=0,
+        xmax=320,
+        default,
+        legend pos=north west
+    ]
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-AL-backscattering.txt};
+    \addlegendentry{Aluminium Plate}
+    \addplot[green, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Cd-backscattering.txt};
+    \addlegendentry{Cadmium Plate}
+    \addplot[blue, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Fe-backscattering.txt};
+    \addlegendentry{Iron Plate}
+    \addplot[orange, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Pb-backscattering.txt};
+    \addlegendentry{Lead Plate}
+    \end{axis}
+    \end{tikzpicture}
+    \captionof{figure}{}
+\end{figure}
+\end{center}
 \subsection{Abosrption by a lead plate}
+\begin{center}
+\begin{figure}[H]
+    \begin{tikzpicture}
+    \begin{axis}[
+        title={$^{22}Na$ Spectrum},
+        xlabel=channel,
+        ylabel=counts,
+        height=0.7\textwidth,
+        ymin=0,
+        xmin=0,
+        xmax=320,
+        default,
+        legend pos=north west
+    ]
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Pb-shield.txt};
+    \addlegendentry{Aluminium Plate}
+    \end{axis}
+    \end{tikzpicture}
+    \captionof{figure}{}
+\end{figure}
+\end{center}
 \subsection{Convection coefficient}
 
 \section{Analysis of spectrum of $^{22}Na$}
 \subsection{Energy-calibration}
+\begin{center}
+\begin{figure}[H]
+    \begin{tikzpicture}
+    \begin{axis}[
+        title={$^{22}Na$ Spectrum},
+        xlabel=channel,
+        ylabel=counts,
+        height=0.7\textwidth,
+        ymin=0,
+        xmin=0,
+        xmax=320,
+        default
+    ]
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22.txt};
+    \end{axis}
+    \end{tikzpicture}
+    \captionof{figure}{}
+\end{figure}
+\end{center}
 
 \subsection{Energy spectrum}
 \subsection{Probability of sumpeaks}
+\begin{center}
+\begin{figure}[H]
+    \begin{tikzpicture}
+    \begin{axis}[
+        title={$^{22}Na$ Spectrum},
+        xlabel=channel,
+        ylabel=counts,
+        height=0.7\textwidth,
+        ymin=0,
+        xmin=0,
+        xmax=400,
+        default
+    ]
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-sum.txt};
+    \end{axis}
+    \end{tikzpicture}
+    \captionof{figure}{}
+\end{figure}
+\end{center}
 \subsection{$\beta^+$-branching ratio}
 \subsection{Multiple event process}
 

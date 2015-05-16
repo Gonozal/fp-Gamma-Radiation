@@ -317,8 +317,8 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \si
         xmax=320,
         default
     ]
-    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22.txt};
-    \addplot[green, mark=x, mark size=0pt, samples=100, domain=-60:115] {2401.28*e^(-0.00245762*(-108.445+x)^2)};
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg.txt};
+    \addplot[green, mark=x, mark size=0pt, samples=150, domain=-60:180] {2401.28*e^(-0.00245762*(-108.445+x)^2)};
     \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270] {963.17*e^(-0.0180637*(-235.828+x)^2)};
     \end{axis}
     \end{tikzpicture}

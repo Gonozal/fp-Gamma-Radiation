@@ -235,9 +235,9 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \cdot \sigma} \cdot e^{-\frac{(x-\mu )^2}
 
 \begin{center}
   \begin{tabular}{r|r|r|r|r|r|r}
-           & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
-     xray  & $17066$ & $597$      & $90,7$  & $0,14$       & $3,69$   & $0,16$          \\ \hline
-     gamma & $87052$ & $1285$     & $232,4$ & $0,11$       & $7,21$   & $0,14$          \\
+     type of peak & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
+     xray         & $17066$ & $597$      & $90,7$  & $0,14$       & $3,69$   & $0,16$          \\ \hline
+     gamma        & $87052$ & $1285$     & $232,4$ & $0,11$       & $7,21$   & $0,14$          \\
 	\end{tabular}
 \end{center}
 
@@ -366,7 +366,7 @@ Using these values we can find the energy calibration for the detector to be $E(
 \subsubsection{Fit Values}
 \begin{center}
   \begin{tabular}{r|r|r|r|r|r|r}
-                  & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
+     type of peak & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
      annihilation & $46825$ & $1119$     & $145,6$ & $0,08$       & $3,33$   & $0,10$          \\ \hline
      photo        & $11847$ & $129$      & $236,1$ & $0,05$       & $4,71$   & $0,06$          \\
 	\end{tabular}
@@ -444,13 +444,22 @@ source is placed directly on top of the detector leads to the formation of a sum
 
 \section{Energy Resolution}
 
+To calculate the Energy Resolution of the detector, we first need the full width
+at half maximum (FWHM) of the fitted peaks. The FWHM of a guassian can be
+calculated with
+$$FWHM = 2 \sqrt{2 \cdot ln2} \cdot \sigma_{e_{\gamma}}$$
+where $\sigma_{e_{\gamma}} = \sqrt{E_\gamma}\sqrt{E_{eff}}$. This gives us
+$$FWHM = 2 \sqrt{2 \cdot ln2} \cdot \sqrt{E_\gamma}\sqrt{E_{eff}}$$
+with $2 \sqrt{2 \cdot ln2} \cdot \sqrt{E_\gamma}$ being the rise of a graph
+fitted through $E_\gamma$ (in $keV$) plotted over $\sqrt{E_\gamma}$ (in $\sqrt{keV}$).
+
 \begin{center}
   \begin{tabular}{r|r|r}
-    $E_\gamma$ in $keV$ & $\sqrt{E_\gamma}$ in $\sqrt{keV}$ & FWHM in keV \\ \hline
-    32,9                & 5,74                              & 38,5        \\ \hline
-    511,0               & 22,61                             & 66,2        \\ \hline
-    661,7               & 25,73                             & 75,4        \\ \hline
-    1275,0              & 35,69                             & 93,7        \\
+    $E_\gamma$ in $keV$ & $\sqrt{E_\gamma}$ in $\sqrt{keV}$ & FWHM in $keV$ \\ \hline
+    32,9                & 5,74                              & 38,5          \\ \hline
+    511,0               & 22,61                             & 66,2          \\ \hline
+    661,7               & 25,73                             & 75,4          \\ \hline
+    1275,0              & 35,69                             & 93,7          \\
 
 	\end{tabular}
 \end{center}
@@ -471,13 +480,14 @@ source is placed directly on top of the detector leads to the formation of a sum
     ]
     \addplot[red, only marks, mark=x, mark size=4pt] table[x=X, y=Y] {data/fwhm.txt};
     \addplot[green, mark=x, mark size=0pt, domain=0:40, thick] {27.1052 + 1.84225*x};
-    %\addplot[green, mark=x, mark size=0pt, samples=120, domain=130:180, thick] {};
-    %\addlegendentry{Annihilation peak fit}
     \end{axis}
     \end{tikzpicture}
-    \captionof{figure}{}
+    \captionof{figure}{Strong quadratic correlation between the FWHM and photon energy}
 \end{figure}
 \end{center}
+
+Using the rise of the graph $m=1,84$ we \caption{}n calculate $E_{eff}=\frac{m^2}{8ln2}$
+to $E_{eff}=0,610 keV$.
 
 \section{Background Radiation}
 
@@ -491,7 +501,7 @@ source is placed directly on top of the detector leads to the formation of a sum
     height=0.7\textwidth,
     ymin=0,
     xmin=0,
-    xmax=650,
+    xmax=300,
     default
 ]
 \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/background.txt};
@@ -500,6 +510,10 @@ source is placed directly on top of the detector leads to the formation of a sum
 \captionof{figure}{}
 \end{figure}
 \end{center}
+
+The background spectrum shows a visible peak at about $1400keV$ which could be
+caused by the decay of $^{238}U$ which emits a photon with an energy of
+$1408keV$. The other peaks are too small and diffuse to be clearly identified.
 
 \chapter{Conclusion}
 

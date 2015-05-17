@@ -31,7 +31,7 @@
   },
   /pgfplots/default/.style={%
     /pgf/number format/use comma,
-    legend pos=north east,
+    legend pos=north west,
     x tick label style={/pgf/number format/1000 sep=},
     y tick label style={/pgf/number format/1000 sep=},
     width=0.9\linewidth,
@@ -228,8 +228,10 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
         default
     ]
     \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-1-no-bg.txt};
-    \addplot[green, mark=x, mark size=0pt, samples=100, domain=-60:115] {1850.15*e^(-0.037403*(-90.6604+x)^2)};
-    \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270] {4367.33*e^(-0.00790729*(-232.226+x)^2)};
+    \addplot[green, mark=x, mark size=0pt, samples=100, domain=-60:115, thick] {1850.15*e^(-0.037403*(-90.6604+x)^2)};
+    \addlegendentry{X-ray peak fit}
+    \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270, thick] {4367.33*e^(-0.00790729*(-232.226+x)^2)};
+    \addlegendentry{Gamma-ray peak fit}
     \end{axis}
     \end{tikzpicture}
     \captionof{figure}{}
@@ -241,12 +243,13 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
 $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \sigma ^2}}$$
 
 \begin{center}
-  \begin{tabular}{r|l|l|l}
-           & k         & $\mu$     & $\sigma$  \\ \hline
-     xray  & $16956,2$ & $90,6604$ & $3,65621$ \\ \hline
-     gamma & $87051,7$ & $232,226$ & $7,9519$ \\
+  \begin{tabular}{r|r|r|r|r|r|r}
+           & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\delta \sigma$ \\ \hline
+     xray  & $16956$ & $303$      & $90,7$  & $0,07$       & $3,66$   & $0,08$          \\ \hline
+     gamma & $87052$ & $2603$     & $232,2$ & $0,27$       & $7,95$   & $0,28$          \\
 	\end{tabular}
 \end{center}
+
 
 \subsection{Energy spectrum}
 
@@ -262,8 +265,7 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \si
         ymin=0,
         xmin=0,
         xmax=320,
-        default,
-        legend pos=north west
+        default
     ]
     \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-AL-backscattering-no-bg.txt};
     \addlegendentry{Aluminium Plate}
@@ -278,6 +280,7 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \si
     \captionof{figure}{}
 \end{figure}
 \end{center}
+
 \subsection{Abosrption by a lead plate}
 \begin{center}
 \begin{figure}[H]
@@ -290,11 +293,12 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \si
         ymin=0,
         xmin=0,
         xmax=320,
-        default,
-        legend pos=north west
+        default
     ]
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-1-no-bg.txt};
+    \addlegendentry{Without lead plate}
     \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Pb-shield-no-bg.txt};
-    \addlegendentry{Lead Plate}
+    \addlegendentry{With lead plate}
     \end{axis}
     \end{tikzpicture}
     \captionof{figure}{}
@@ -318,8 +322,10 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \si
         default
     ]
     \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg.txt};
-    \addplot[green, mark=x, mark size=0pt, samples=150, domain=-60:180] {2401.28*e^(-0.00245762*(-108.445+x)^2)};
-    \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270] {963.17*e^(-0.0180637*(-235.828+x)^2)};
+    \addplot[green, mark=x, mark size=0pt, samples=150, domain=100:220, thick] {5344.67*e^(-0.0359942*(-145.464+x)^2)};
+    \addlegendentry{Annihilation peak fit}
+    \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270, thick] {963.17*e^(-0.0180637*(-235.828+x)^2)};
+    \addlegendentry{Second peak fit}
     \end{axis}
     \end{tikzpicture}
     \captionof{figure}{}
@@ -328,10 +334,10 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \si
 
 \subsubsection{Fit Values}
 \begin{center}
-  \begin{tabular}{r|r@{,}l|r@{,}l|r@{,}l}
-           & \multicolumn{2}{c|}{k}         & \multicolumn{2}{c|}{$\mu$}     & \multicolumn{2}{c}{$\sigma$}  \\ \hline
-     xray  & $85853$ &$9$ & $108$&$445$ & $14$&$2635$ \\ \hline
-     gamma & $12702$ &$1$ & $235$&$828$ & $5$&$26116$ \\
+  \begin{tabular}{r|r|r|r|r|r|r}
+                   & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\delta \sigma$ \\ \hline
+     annihilation  & $49932$ & $2597$     & $145,5$  & $0,22$       & $3,73$   & $0,22$          \\ \hline
+     photo         & $12702$ & $799$      & $235,8$  & $0,38$       & $5,26$   & $0,38$          \\
 	\end{tabular}
 \end{center}
 

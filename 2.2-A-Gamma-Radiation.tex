@@ -25,6 +25,7 @@
 % \usepackage[square]{natbib}
 % Paket zum Plotten von Datensätzen
 \usepackage{pgfplots}
+\usepackage{pgfplotstable}
 \pgfkeys{%
   /pgfplots/seperators/.style={%
     /pgf/number format/use comma
@@ -76,19 +77,6 @@
 
 % Entspricht-Zeichen
 \usepackage{scalerel}
-
-\newcommand\equalhat{%
-\let\savearraystretch\arraystretch
-\renewcommand\arraystretch{0.3}
-\begin{array}{c}
-\stretchto{
-    \scalerel*[\widthof{=}]{\wedge}
-    {\rule{1ex}{3ex}}%
-}{0.5ex}\\ 
-=%
-\end{array}
-\let\arraystretch\savearraystretch
-}
 %BEGINN TITELSEITE
 
 \title{Interaction of $\gamma$-Radiation with Matter}
@@ -229,9 +217,9 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
     ]
     \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-1-no-bg.txt};
     \addlegendentry{$Cs^{137}$ Spectrum}
-    \addplot[green, mark=x, mark size=0pt, samples=100, domain=-60:115, thick] {1850.15*e^(-0.037403*(-90.6604+x)^2)};
+    \addplot[green, mark=x, mark size=0pt, samples=100, domain=-60:115, thick] {1846.49*e^(-0.0367783*(-90.6847+x)^2)};
     \addlegendentry{X-ray peak fit}
-    \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270, thick] {4367.33*e^(-0.00790729*(-232.226+x)^2)};
+    \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270, thick] {4549.13*e^(-0.00960132*(-232.427+x)^2)};
     \addlegendentry{Gamma-ray peak fit}
     \end{axis}
     \end{tikzpicture}
@@ -239,7 +227,7 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
 \end{figure}
 \end{center}
 
-$E(c) = 4,44 \cdot c - 369,77$
+$E(c) = 4,44 \cdot c - 369,37$
 
 \subsubsection{Fit Values}
 
@@ -248,8 +236,8 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \cdot \sigma} \cdot e^{-\frac{(x-\mu )^2}
 \begin{center}
   \begin{tabular}{r|r|r|r|r|r|r}
            & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
-     xray  & $16956$ & $303$      & $90,7$  & $0,07$       & $3,66$   & $0,08$          \\ \hline
-     gamma & $87052$ & $2603$     & $232,2$ & $0,27$       & $7,95$   & $0,28$          \\
+     xray  & $17066$ & $597$      & $90,7$  & $0,14$       & $3,69$   & $0,16$          \\ \hline
+     gamma & $87052$ & $1285$     & $232,4$ & $0,11$       & $7,21$   & $0,14$          \\
 	\end{tabular}
 \end{center}
 
@@ -264,7 +252,7 @@ As we can see in the following graph, the height of the backscattering peak depe
 \begin{figure}[H]
     \begin{tikzpicture}
     \begin{axis}[
-        title={$^{137}Cs$ Spectrum},
+        title={$^{137}Cs$ Spectrum with backscatter radiation},
         xlabel=Energy in $keV$,
         ylabel=counts,
         height=0.7\textwidth,
@@ -296,9 +284,9 @@ Here we see the spectra in comparision with/without lead plate:
 
 \begin{center}
 \begin{figure}[H]
-    \begin{tikzpicture}but 
+    \begin{tikzpicture}
     \begin{axis}[
-        title={$^{137}Cs$ Spectrum},
+        title={$^{137}Cs$ Spectrum with and without lead shield},
         xlabel=Energy in $keV$,
         ylabel=counts,
         height=0.7\textwidth,
@@ -360,71 +348,136 @@ $$K_R = K_{\gamma} - 0,192 \cdot K_w$$.
     ]
     \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg.txt};
     \addlegendentry{$Na^{22}$ Spectrum}
-    \addplot[green, mark=x, mark size=0pt, samples=150, domain=100:220, thick] {5344.67*e^(-0.0359942*(-145.464+x)^2)};
+    \addplot[green, mark=x, mark size=0pt, samples=120, domain=130:180, thick] {5608.36*e^(-0.0450679*(-145.616+x)^2)};
     \addlegendentry{Annihilation peak fit}
-    \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270, thick] {963.17*e^(-0.0180637*(-235.828+x)^2)};
-    \addlegendentry{Second peak fit}
+    \addplot[blue, mark=x, mark size=0pt, samples=100, domain=210:255, thick] {1002.52*e^(-0.0224958*(-236.12+x)^2)};
+    \addlegendentry{Photo-peak fit}
     \end{axis}
     \end{tikzpicture}
     \captionof{figure}{}
 \end{figure}
 \end{center}
 
+For the energy calibration we look at the annihilation peak of $511 keV$ and the
+photo peak at $1275 keV$, which we find at channels 146 and 236 respectively.
+
+Using these values we can find the energy calibration for the detector to be $E(c) = 8,442 \cdot c - 738$.
+
 \subsubsection{Fit Values}
 \begin{center}
   \begin{tabular}{r|r|r|r|r|r|r}
-                   & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
-     annihilation  & $49932$ & $2597$     & $145,5$  & $0,22$       & $3,73$   & $0,22$          \\ \hline
-     photo         & $12702$ & $799$      & $235,8$  & $0,38$       & $5,26$   & $0,38$          \\
+                  & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
+     annihilation & $46825$ & $1119$     & $145,6$ & $0,08$       & $3,33$   & $0,10$          \\ \hline
+     photo        & $11847$ & $129$      & $236,1$ & $0,05$       & $4,71$   & $0,06$          \\
 	\end{tabular}
 \end{center}
 
 
 \subsection{Energy spectrum}
+We have used the annihilation and the photo peak to calibrate the detector and
+as such they coincide with literature value. However, the compton peak ranging
+from $0 KeV$ to $340,7 keV$ is also clearly visible.
+
+
+
+
 \subsection{Probability of sumpeaks}
+A so-called sumpeak occurs whenever two or more incident rays are detected happen in a
+shorter time span the temporal resolution of the detector. In such a case the
+energies of both incident rays are added together. In our expirment the two
+events that can coincide with each other are the detection of annihilation
+x-rays and gamma rays. This gives the appearance of an additional peak at their
+combined energies of $1786 keV$.
+
+The probability of the occurence of a sumpeak is dependent on the detector and
+is quite low in our case. Moving the radioactive source closer to the detecter
+increases the frequency at which radioactive events are detected, since the
+detector covers a larger angle. This in turn drastically increases the
+probability of a sumpeak to occur.
+
 \begin{figure}[H]
 \begin{tikzpicture}
 \begin{axis}[
   default,
   width=0.48\linewidth,
   title={$^{22}Na$ Spectrum},
-  xlabel=channel,
+  xlabel=Energy in $keV$,
   ylabel=counts,
   height=0.3\linewidth,
   ymin=0,
-  xmin=50,
-  xmax=350,
+  xmin=0,
+  xmax=2200,
   name=first
 ]
-    \addplot[blue, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg.txt};
-    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-sum-no-bg.txt};
+    \addplot[blue, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg-calibrated.txt};
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-sum-no-bg-calibrated.txt};
+
+As evedient from figure 4.5, there is no sumpeak when the source is 10 cm away
+from the detector. However, the increased frequency of incident rays when the
+source is placed directly on top of the detector leads to the formation of a sumpeak.
 
 \end{axis}
 
 \begin{axis}[
   default,
   width=0.28\linewidth,
-  title={$^{22}Na$ Spectrum},
-  xlabel=channel,
+  title={$^{22}Na$ Spectrum at the sum peak},
+  xlabel=Energy in $keV$,
   ylabel=counts,
   height=0.3\linewidth,
   ymin=0,
-  xmin=280,
-  xmax=320,
+  xmin=1640,
+  xmax=1980,
   name=second,
   at=(first.outer south east),
   anchor=outer south west
 ]
-    \addplot[blue, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg.txt};
-    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-sum-no-bg.txt};
+    \addplot[blue, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg-calibrated.txt};
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-sum-no-bg-calibrated.txt};
 \end{axis}
 \end{tikzpicture}
 \captionof{figure}{}
 \end{figure}
+
 \subsection{$\beta^+$-branching ratio}
 \subsection{Multiple event process}
 
 \section{Energy Resolution}
+
+\begin{center}
+  \begin{tabular}{r|r|r}
+    $E_\gamma$ in $keV$ & $\sqrt{E_\gamma}$ in $\sqrt{keV}$ & FWHM in keV \\ \hline
+    32,9                & 5,74                              & 38,5        \\ \hline
+    511,0               & 22,61                             & 66,2        \\ \hline
+    661,7               & 25,73                             & 75,4        \\ \hline
+    1275,0              & 35,69                             & 93,7        \\
+
+	\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{figure}[H]
+    \begin{tikzpicture}
+    \begin{axis}[
+        title={Energy Resolution},
+        xlabel=$\sqrt{E_\gamma}$ in $\sqrt{keV}$,
+        ylabel=FWHM in keV,
+        height=0.7\textwidth,
+        ymin=25,
+        ymax=100,
+        xmin=4,
+        xmax=38,
+        default
+    ]
+    \addplot[red, only marks, mark=x, mark size=4pt] table[x=X, y=Y] {data/fwhm.txt};
+    \addplot[green, mark=x, mark size=0pt, domain=0:40, thick] {27.1052 + 1.84225*x};
+    %\addplot[green, mark=x, mark size=0pt, samples=120, domain=130:180, thick] {};
+    %\addlegendentry{Annihilation peak fit}
+    \end{axis}
+    \end{tikzpicture}
+    \captionof{figure}{}
+\end{figure}
+\end{center}
 
 \section{Background Radiation}
 
@@ -450,7 +503,13 @@ $$K_R = K_{\gamma} - 0,192 \cdot K_w$$.
 
 \chapter{Conclusion}
 
-In this experiment we analyzed both general interaction of gamma-rays with matter like compton scattering, photoeffect etc. and also characteristics of the isotopes $^{137}Cs$ and $^{22}Na$. With the aid of well known spectral lines we calibrated the apparatus and could then identify futher lines. Finally we could determine characteristic numbers as the conversion coefficient and the $\beta^+$ branching ratio. In this way the experiment is a good preparation for gamma-ray spectroscopy, gamma-ray detection etc.
+In this experiment we analyzed both general interaction of gamma-rays with
+matter like compton scattering, photoeffect etc. and also characteristics of the
+isotopes $^{137}Cs$ and $^{22}Na$. With the aid of well known spectral lines we
+calibrated the apparatus and could then identify futher lines. Finally we could
+determine characteristic numbers as the conversion coefficient and the $\beta^+$
+branching ratio. In this way the experiment is a good preparation for gamma-ray
+spectroscopy, gamma-ray detection etc.
 
 %ENDE INHALT
 \cleardoublepage{}

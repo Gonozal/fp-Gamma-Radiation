@@ -129,9 +129,9 @@ Additionally to the well known $\alpha$, $\beta^{\pm}$ and $\gamma$ decay there 
 
 Second there is the inner conversion as an alternative to $\gamma$ decay. Via direct elektromagnetic interaction energy is transferred from the nucleus to an atomic electron. The nucleus switches into an lower state and the electron is emitted i.e.\ the atom is ionized. As a characteristic number we define the conversion rate as follows
 
-$$\alpha = \frac{N_{e^-}}{N_{\gamma}}$$
+$$\alpha_K = \frac{n_K}{n_{\gamma}}$$
 
-where $N_{e^-}$ is the number of emitted conversion electrons and $N_{\gamma}$ is the number of emitted photons.
+where $n_K$ is the number of emitted conversion electrons and $n_{\gamma}$ is the number of emitted photons.
 
 Below we see the decay schemes of the used Isotopes:
 
@@ -254,6 +254,9 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \si
 \subsection{Energy spectrum}
 
 \subsection{Backscattering peak}
+
+As we can see in the following graph, the height of the backscattering peak depends heavily on the used material: 
+
 \begin{center}
 \begin{figure}[H]
     \begin{tikzpicture}
@@ -281,10 +284,15 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \si
 \end{figure}
 \end{center}
 
-\subsection{Abosrption by a lead plate}
+Generally the backscatter peak has its origin in photons which are backscattered in the shielding around the detector at an angle close to 180$^{\circ}$. That means the photon goes back into the detector and is absorbed i.e. creates the backscatter peak. The probability for compton scattering, which is responsible for backscattering, grows linear with the mass number. Then we have the interaction with the backscattered photons in the detector due to photoeffect because of the relative small energy of the scattered photons. The probability for photoeffect also depends on the mass number, not linear but proportional to Z$^4$. 
+
+\subsection{Absorption by a lead plate}
+
+Here we see the spectra in comparision with/without lead plate:
+
 \begin{center}
 \begin{figure}[H]
-    \begin{tikzpicture}
+    \begin{tikzpicture}but 
     \begin{axis}[
         title={$^{137}Cs$ Spectrum},
         xlabel=channel,
@@ -304,7 +312,32 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \si
     \captionof{figure}{}
 \end{figure}
 \end{center}
-\subsection{Convection coefficient}
+
+Obviously the lead plate takes away intensity because of its large mass number, which results in an high absorption of gamma rays (and X-rays, too). Thats also the reason why lead is a suitable material to block gamma-rays off. As you can see the damping is stronger for lower energies which is a result of the different absorption coefficients for photoeffekt and compton scattering. For low energies (photoeffect is dominant) the reduction is proportional to Z$^4$ and for higher energies where compton scattering dominates its proportional to Z. That means for lower energies the higher mass number weakens the gamma-rays more efficiently. If energy grows up further until pair production dominates, reduction becomes more efficient again as its proportional to Z$^2$ then.
+
+\subsection{Conversion coefficient}
+
+The (internal) conversion coefficient describes the rate of internal conversion i.e. its empirically determined by the following formula mentioned before:
+
+$$\alpha_K = \frac{n_K}{n_{\gamma}}$$
+
+Because we cant measure $n_K$ directly we use the following dependency:
+
+$$n_R = \omega_K \cdot n_K$$
+
+where $n_R$ is the number of emitted x-rays and $\omega_K$ is the quantum efficiency. Now we have to determine the source activity which is given by:
+
+$$F = \epsilon \cdot R^{PT} \cdot N \cdot K$$
+
+where N is the number of emitted photons during measurement, F is the area under the total absorption line, $\epsilon$ is the total sensitivity and $R^{PT}$ is the peak-to-total ratio. $\epsilon$ and $R^{PT}$ both depends on the geometry (size of crystal and distance to the source) and the energy of the photons. K is an correction factor.
+
+In case of energies below 100 keV we must consider the absorption at the entry window of the crystal which gives a number for $K_w = 0,85$. Finally we can determine the value of $\alpha_K$ as:
+
+$$\alpha_K = \frac{F_R \epsilon_{\gamma} R_{\gamma}^{PT}  K_{\gamma}}{\omega_K F_{\gamma} \epsilon_R R_K^{PT} K_R}$$
+
+where $K_{\gamma}$  and $K_R$ are related as follows: 
+
+$$K_R = K_{\gamma} - 0,192 \cdot K_w$$.
 
 \section{Analysis of the spectrum of $^{22}Na$}
 \subsection{Energy-calibration}
@@ -411,6 +444,8 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \si
 \end{center}
 
 \chapter{Conclusion}
+
+In this experiment we analyzed both general interaction of gamma-rays with matter like compton scattering, photoeffect etc. and also characteristics of the isotopes $^{137}Cs$ and $^{22}Na$. With the aid of well known spectral lines we calibrated the apparatus and could then identify futher lines. Finally we could determine characteristic numbers as the conversion coefficient and the $\beta^+$ branching ratio. In this way the experiment is a good preparation for gamma-ray spectroscopy, gamma-ray detection etc.
 
 %ENDE INHALT
 \cleardoublepage{}

@@ -228,6 +228,7 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
         default
     ]
     \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-1-no-bg.txt};
+    \addlegendentry{$Cs^{137}$ Spectrum}
     \addplot[green, mark=x, mark size=0pt, samples=100, domain=-60:115, thick] {1850.15*e^(-0.037403*(-90.6604+x)^2)};
     \addlegendentry{X-ray peak fit}
     \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270, thick] {4367.33*e^(-0.00790729*(-232.226+x)^2)};
@@ -238,13 +239,15 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
 \end{figure}
 \end{center}
 
+$E(c) = 4,44 \cdot c - 369,77$
+
 \subsubsection{Fit Values}
 
-$$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \sigma ^2}}$$
+$$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \cdot \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \sigma ^2}}$$
 
 \begin{center}
   \begin{tabular}{r|r|r|r|r|r|r}
-           & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\delta \sigma$ \\ \hline
+           & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
      xray  & $16956$ & $303$      & $90,7$  & $0,07$       & $3,66$   & $0,08$          \\ \hline
      gamma & $87052$ & $2603$     & $232,2$ & $0,27$       & $7,95$   & $0,28$          \\
 	\end{tabular}
@@ -259,21 +262,22 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \si
     \begin{tikzpicture}
     \begin{axis}[
         title={$^{137}Cs$ Spectrum},
-        xlabel=channel,
+        xlabel=Energy in $keV$,
         ylabel=counts,
         height=0.7\textwidth,
         ymin=0,
         xmin=0,
-        xmax=320,
-        default
+        xmax=1300,
+        default,
+        legend pos=north east
     ]
-    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-AL-backscattering-no-bg.txt};
+    \addplot[red, only marks, mark=x, mark size=2pt] table[x index=0, y index=1] {data/Cs137-AL-backscattering-no-bg-calibrated.txt};
     \addlegendentry{Aluminium Plate}
-    \addplot[green, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Cd-backscattering-no-bg.txt};
+    \addplot[green, only marks, mark=x, mark size=2pt] table[x index=0, y index=1] {data/Cs137-Cd-backscattering-no-bg-calibrated.txt};
     \addlegendentry{Cadmium Plate}
-    \addplot[blue, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Fe-backscattering-no-bg.txt};
+    \addplot[blue, only marks, mark=x, mark size=2pt] table[x index=0, y index=1] {data/Cs137-Fe-backscattering-no-bg-calibrated.txt};
     \addlegendentry{Iron Plate}
-    \addplot[orange, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Pb-backscattering-no-bg.txt};
+    \addplot[orange, only marks, mark=x, mark size=2pt] table[x index=0, y index=1] {data/Cs137-Pb-backscattering-no-bg-calibrated.txt};
     \addlegendentry{Lead Plate}
     \end{axis}
     \end{tikzpicture}
@@ -287,17 +291,17 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \si
     \begin{tikzpicture}
     \begin{axis}[
         title={$^{137}Cs$ Spectrum},
-        xlabel=channel,
+        xlabel=Energy in $keV$,
         ylabel=counts,
         height=0.7\textwidth,
         ymin=0,
         xmin=0,
-        xmax=320,
+        xmax=1300,
         default
     ]
-    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-1-no-bg.txt};
+    \addplot[red, only marks, mark=x, mark size=2pt] table[x index=0, y index=1] {data/Cs137-1-no-bg-calibrated.txt};
     \addlegendentry{Without lead plate}
-    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-Pb-shield-no-bg.txt};
+    \addplot[blue, only marks, mark=x, mark size=2pt] table[x index=0, y index=1] {data/Cs137-Pb-shield-no-bg-calibrated.txt};
     \addlegendentry{With lead plate}
     \end{axis}
     \end{tikzpicture}
@@ -322,6 +326,7 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \si
         default
     ]
     \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg.txt};
+    \addlegendentry{$Na^{22}$ Spectrum}
     \addplot[green, mark=x, mark size=0pt, samples=150, domain=100:220, thick] {5344.67*e^(-0.0359942*(-145.464+x)^2)};
     \addlegendentry{Annihilation peak fit}
     \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270, thick] {963.17*e^(-0.0180637*(-235.828+x)^2)};
@@ -335,7 +340,7 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \si
 \subsubsection{Fit Values}
 \begin{center}
   \begin{tabular}{r|r|r|r|r|r|r}
-                   & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\delta \sigma$ \\ \hline
+                   & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
      annihilation  & $49932$ & $2597$     & $145,5$  & $0,22$       & $3,73$   & $0,22$          \\ \hline
      photo         & $12702$ & $799$      & $235,8$  & $0,38$       & $5,26$   & $0,38$          \\
 	\end{tabular}

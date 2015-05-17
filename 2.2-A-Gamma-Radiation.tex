@@ -239,12 +239,17 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
 \end{figure}
 \end{center}
 
+Based on the fits in figure 4.1. we can do the energy calibration as follows:
+
 $E(c) = 4,44 \cdot c - 369,77$
+
+Two well known values of the used Isotope are sufficient for the energy calibration because of the linear correlation between impuls height and photon energy.
 
 \subsubsection{Fit Values}
 
-$$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \cdot \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \sigma ^2}}$$
+We used the following fit values and the theoretical values for the x-ray peak (32,9 keV) and gamma-ray peak (photopeak, 661,66 keV).
 
+$$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \cdot \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \sigma ^2}}$$
 \begin{center}
   \begin{tabular}{r|r|r|r|r|r|r}
            & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
@@ -253,8 +258,36 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \cdot \sigma} \cdot e^{-\frac{(x-\mu )^2}
 	\end{tabular}
 \end{center}
 
-
 \subsection{Energy spectrum}
+
+The calibration explained above gives the following calibrated energy spectrum:
+
+\begin{center}
+\begin{figure}[H]
+    \begin{tikzpicture}
+    \begin{axis}[
+        title={$^{137}Cs$ Spectrum},
+        xlabel=energy in keV,
+        ylabel=counts,
+        height=0.7\textwidth,
+        ymin=0,
+        xmin=0,
+        xmax=1300,
+        default
+    ]
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-1-no-bg-calibrated.txt};
+    \addlegendentry{calibrated $Cs^{137}$ Spectrum}
+    \end{axis}
+    \end{tikzpicture}
+    \captionof{figure}{}
+\end{figure}
+\end{center}
+
+Here we see of course the x-ray-peak at 32,9 keV and the photopeak at 661,66 keV beacause we used them for calibration and also the compton edge, although its difficult to identify. It's located at around 470 keV $\pm$ 25 keV. The theoretical value is determined by
+
+$$E_{Compton} = \frac{E_{\gamma}^2}{2E_{\gamma} + m_ec^2}$$.
+
+That gives 478 keV which means 470 keV matches pretty good. At 170$\pm 25$ keV we can (hardly) see another small peak which is the backscattering peak, its theoretical value is determined by $E_{backscatter} = E_{\gamma} - E_{Compton}$ which gives 184 keV.
 
 \subsection{Backscattering peak}
 

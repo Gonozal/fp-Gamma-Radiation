@@ -231,7 +231,7 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
     \addlegendentry{$Cs^{137}$ Spectrum}
     \addplot[green, mark=x, mark size=0pt, samples=100, domain=70:110, thick] {1846.49*e^(-0.0367783*(-90.6847+x)^2)};
     \addlegendentry{X-ray peak fit}
-    \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270, thick] {4367.33*e^(-0.00790729*(-232.226+x)^2)};
+    \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270, thick] {4549.13*e^(-0.00960132*(-232.427+x)^2)};
     \addlegendentry{Gamma-ray peak fit}
     \end{axis}
     \end{tikzpicture}
@@ -239,18 +239,11 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
 \end{figure}
 \end{center}
 
-Based on the fits in figure 4.1. we can do the energy calibration as follows:
-
-$E(c) = 4,44 \cdot c - 369,77$
-
-Two well known spectral lines of the used isotope are sufficient for the energy calibration because of the linear correlation between impuls height and photon energy.
-
 Using these values we can find the energy calibration for the detector to be $E(c) = 4,44 \cdot c - 369,37$
 
 \subsubsection{Fit Values}
 Since radioactive decay and it's detection are stastical processes, we used a
 gaussian fit for the detected peaks:
-$$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \cdot \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \sigma ^2}}$$
 
 $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \cdot \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \sigma ^2}}$$
 \begin{center}
@@ -299,7 +292,7 @@ As we can see in the following graph, the height of the backscattering peak depe
 \begin{figure}[H]
     \begin{tikzpicture}
     \begin{axis}[
-        title={$^{137}Cs$ Spectrum},
+        title={$^{137}Cs$ Spectrum  with backscatter radiation},
         xlabel=Energy in $keV$,
         ylabel=counts,
         height=0.7\textwidth,
@@ -333,9 +326,9 @@ Here we see the spectra in comparision with/without lead plate:
 
 \begin{center}
 \begin{figure}[H]
-    \begin{tikzpicture}but 
+    \begin{tikzpicture}
     \begin{axis}[
-        title={$^{137}Cs$ Spectrum},
+        title={$^{137}Cs$ Spectrum with and without lead shield},
         xlabel=Energy in $keV$,
         ylabel=counts,
         height=0.7\textwidth,
@@ -401,13 +394,18 @@ $$K_R = K_{\gamma} - 0,192 \cdot K_w$$.
     \addlegendentry{$Na^{22}$ Spectrum}
     \addplot[green, mark=x, mark size=0pt, samples=120, domain=130:160, thick] {5608.36*e^(-0.0450679*(-145.616+x)^2)};
     \addlegendentry{Annihilation peak fit}
-    \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270, thick] {963.17*e^(-0.0180637*(-235.828+x)^2)};
+    \addplot[blue, mark=x, mark size=0pt, samples=100, domain=210:255, thick] {1002.52*e^(-0.0224958*(-236.12+x)^2)};
+    \addlegendentry{Photo-peak fit}
     \addlegendentry{Second peak fit}
     \end{axis}
     \end{tikzpicture}
     \captionof{figure}{$^{22}Na$-Spectrum and fits for the annihilation- and photo-peak}
 \end{figure}
 \end{center}
+For the energy calibration we look at the annihilation peak of $511 keV$ and the
+photo peak at $1275 keV$, which we find at channels 146 and 236 respectively.
+
+Using these values we can find the energy calibration for the detector to be $E(c) = 8,442 \cdot c - 738$.
 
 \subsubsection{Fit Values}
 Again we used a gaussian fit to characterize the detected peaks:
@@ -415,15 +413,30 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \cdot \sigma} \cdot e^{-\frac{(x-\mu )^2}
 
 \begin{center}
   \begin{tabular}{r|r|r|r|r|r|r}
-                   & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
-     annihilation  & $49932$ & $2597$     & $145,5$  & $0,22$       & $3,73$   & $0,22$          \\ \hline
-     photo         & $12702$ & $799$      & $235,8$  & $0,38$       & $5,26$   & $0,38$          \\
+     type of peak & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
+     annihilation & $46825$ & $1119$     & $145,6$ & $0,08$       & $3,33$   & $0,10$          \\ \hline
+     photo        & $11847$ & $129$      & $236,1$ & $0,05$       & $4,71$   & $0,06$          \\
 	\end{tabular}
 \end{center}
 
 
 \subsection{Energy spectrum}
+We have used the annihilation and the photo peak to calibrate the detector and
+as such they coincide with literature value. However, the compton peak ranging
+from $0 KeV$ to $340,7 keV$ is also clearly visible.
 \subsection{Probability of sumpeaks}
+A so-called sumpeak occurs whenever two or more incident rays are detected happen in a
+shorter time span the temporal resolution of the detector. In such a case the
+energies of both incident rays are added together. In our expirment the two
+events that can coincide with each other are the detection of annihilation
+x-rays and gamma rays. This gives the appearance of an additional peak at their
+combined energies of $1786 keV$.
+
+The probability of the occurence of a sumpeak is dependent on the detector and
+is quite low in our case. Moving the radioactive source closer to the detecter
+increases the frequency at which radioactive events are detected, since the
+detector covers a larger angle. This in turn drastically increases the
+probability of a sumpeak to occur.
 \begin{figure}[H]
 \begin{tikzpicture}
 \begin{axis}[
@@ -434,8 +447,8 @@ $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \cdot \sigma} \cdot e^{-\frac{(x-\mu )^2}
   ylabel=counts,
   height=0.3\linewidth,
   ymin=0,
-  xmin=50,
-  xmax=350,
+  xmin=0,
+  xmax=2200,
   name=first
 ]
     \addplot[blue, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg-calibrated.txt};
@@ -452,19 +465,19 @@ source is placed directly on top of the detector leads to the formation of a sum
 \begin{axis}[
   default,
   width=0.28\linewidth,
-  title={$^{22}Na$ Spectrum},
-  xlabel=channel,
+  title={$^{22}Na$ Spectrum at the sum peak},
+  xlabel=Energy in $keV$,
   ylabel=counts,
   height=0.3\linewidth,
   ymin=0,
-  xmin=280,
-  xmax=320,
+  xmin=1640,
+  xmax=1980,
   name=second,
   at=(first.outer south east),
   anchor=outer south west
 ]
-    \addplot[blue, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg.txt};
-    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-sum-no-bg.txt};
+    \addplot[blue, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg-calibrated.txt};
+    \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-sum-no-bg-calibrated.txt};
 \end{axis}
 \end{tikzpicture}
 \captionof{figure}{Spectrum of $^{22}Na$ with the source in a 10cm distance from
@@ -490,6 +503,9 @@ $$\eta = \frac{n_\beta}{n_{tot}} = \frac{\epsilon_{tot} R^{PT}_{tot} K_{tot}
 With our measured data and the values from the experiment room we find that $\eta = 0,94$, whereas the literature value is $\eta = 0,9$.
 
 \subsection{Multiple event process}
+To determine the fraction of multiple event processes that count towards the
+photo-peak, we first need to get the peak to total ratio: $\eta_{PT}=\frac{n_{tot}}{n_{all}-n\beta}=$
+
 
 \section{Energy Resolution}
 
@@ -550,7 +566,7 @@ to $E_{eff}=0,610 keV$.
     height=0.7\textwidth,
     ymin=0,
     xmin=0,
-    xmax=650,
+    xmax=300,
     default
 ]
 \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/background.txt};
@@ -561,9 +577,20 @@ to $E_{eff}=0,610 keV$.
 \end{figure}
 \end{center}
 
+The background spectrum shows a visible peak at about $1400keV$ which could be
+caused by the decay of $^{238}U$ which emits a photon with an energy of
+$1408keV$. The other peaks are too small and diffuse to be clearly identified.
+
+
 \chapter{Conclusion}
 
-In this experiment we analyzed both general interaction of gamma-rays with matter like compton scattering, photoeffect etc. and also characteristics of the isotopes $^{137}Cs$ and $^{22}Na$. With the aid of well known spectral lines we calibrated the apparatus and could then identify futher lines. Finally we could determine characteristic numbers as the conversion coefficient and the $\beta^+$ branching ratio. In this way the experiment is a good preparation for gamma-ray spectroscopy, gamma-ray detection etc.
+In this experiment we analyzed both general interaction of gamma-rays with
+matter like compton scattering, photoeffect etc. and also characteristics of the
+isotopes $^{137}Cs$ and $^{22}Na$. With the aid of well known spectral lines we
+calibrated the apparatus and could then identify futher lines. Finally we could
+determine characteristic numbers as the conversion coefficient and the $\beta^+$
+branching ratio. In this way the experiment is a good preparation for gamma-ray
+spectroscopy, gamma-ray detection etc.
 
 %ENDE INHALT
 \cleardoublepage{}

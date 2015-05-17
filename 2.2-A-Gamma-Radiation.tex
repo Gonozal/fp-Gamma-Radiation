@@ -217,32 +217,34 @@ In the end we measured the background radiation for 31 minutes and 40 seconds.
     ]
     \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Cs137-1-no-bg.txt};
     \addlegendentry{$Cs^{137}$ Spectrum}
-    \addplot[green, mark=x, mark size=0pt, samples=100, domain=-60:115, thick] {1846.49*e^(-0.0367783*(-90.6847+x)^2)};
+    \addplot[green, mark=x, mark size=0pt, samples=100, domain=70:110, thick] {1846.49*e^(-0.0367783*(-90.6847+x)^2)};
     \addlegendentry{X-ray peak fit}
     \addplot[blue, mark=x, mark size=0pt, samples=100, domain=190:270, thick] {4549.13*e^(-0.00960132*(-232.427+x)^2)};
     \addlegendentry{Gamma-ray peak fit}
     \end{axis}
     \end{tikzpicture}
-    \captionof{figure}{}
+    \captionof{figure}{$^{137}Cs$-Spectrum and fits for the x-ray and gamma-peak}
 \end{figure}
 \end{center}
 
-$E(c) = 4,44 \cdot c - 369,37$
+For the energy calibration of $^{137}Cs$ we look at the x-ray peak at $32,9 kEv$ and the
+gamma peak at $661,7 keV$, which we find at channels 91 and 232 respectively.
+
+Using these values we can find the energy calibration for the detector to be $E(c) = 4,44 \cdot c - 369,37$
 
 \subsubsection{Fit Values}
-
+Since radioactive decay and it's detection are stastical processes, we used a
+gaussian fit for the detected peaks:
 $$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \cdot \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \sigma ^2}}$$
 
 \begin{center}
   \begin{tabular}{r|r|r|r|r|r|r}
-     type of peak & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
-     xray         & $17066$ & $597$      & $90,7$  & $0,14$       & $3,69$   & $0,16$          \\ \hline
-     gamma        & $87052$ & $1285$     & $232,4$ & $0,11$       & $7,21$   & $0,14$          \\
+     Type of peak & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
+     X-ray        & $17066$ & $597$      & $90,7$  & $0,14$       & $3,69$   & $0,16$          \\ \hline
+     Gamma        & $87052$ & $1285$     & $232,4$ & $0,11$       & $7,21$   & $0,14$          \\
 	\end{tabular}
 \end{center}
 
-
-\subsection{Energy spectrum}
 
 \subsection{Backscattering peak}
 
@@ -272,7 +274,9 @@ As we can see in the following graph, the height of the backscattering peak depe
     \addlegendentry{Lead Plate}
     \end{axis}
     \end{tikzpicture}
-    \captionof{figure}{}
+    \captionof{figure}{Spectrum of $^{137}Cs$ with 4 different metal covers
+      which reflect some of the radiation into the detector via comtpon
+      scattering.}
 \end{figure}
 \end{center}
 
@@ -292,7 +296,7 @@ Here we see the spectra in comparision with/without lead plate:
         height=0.7\textwidth,
         ymin=0,
         xmin=0,
-        xmax=1300,
+        xmax=1000,
         default
     ]
     \addplot[red, only marks, mark=x, mark size=2pt] table[x index=0, y index=1] {data/Cs137-1-no-bg-calibrated.txt};
@@ -301,7 +305,9 @@ Here we see the spectra in comparision with/without lead plate:
     \addlegendentry{With lead plate}
     \end{axis}
     \end{tikzpicture}
-    \captionof{figure}{}
+    \captionof{figure}{Effects of a lead shield on the Spectrum of
+      $^{137}Cs$. Photons with lower energy get absorbed at a higher rate than
+      those with high energies.}
 \end{figure}
 \end{center}
 
@@ -348,13 +354,13 @@ $$K_R = K_{\gamma} - 0,192 \cdot K_w$$.
     ]
     \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg.txt};
     \addlegendentry{$Na^{22}$ Spectrum}
-    \addplot[green, mark=x, mark size=0pt, samples=120, domain=130:180, thick] {5608.36*e^(-0.0450679*(-145.616+x)^2)};
+    \addplot[green, mark=x, mark size=0pt, samples=120, domain=130:160, thick] {5608.36*e^(-0.0450679*(-145.616+x)^2)};
     \addlegendentry{Annihilation peak fit}
     \addplot[blue, mark=x, mark size=0pt, samples=100, domain=210:255, thick] {1002.52*e^(-0.0224958*(-236.12+x)^2)};
     \addlegendentry{Photo-peak fit}
     \end{axis}
     \end{tikzpicture}
-    \captionof{figure}{}
+    \captionof{figure}{$^{22}Na$-Spectrum and fits for the annihilation- and photo-peak}
 \end{figure}
 \end{center}
 
@@ -364,6 +370,9 @@ photo peak at $1275 keV$, which we find at channels 146 and 236 respectively.
 Using these values we can find the energy calibration for the detector to be $E(c) = 8,442 \cdot c - 738$.
 
 \subsubsection{Fit Values}
+Again we used a gaussian fit to characterize the detected peaks:
+$$f(x) = k\cdot \frac{1}{\sqrt{2 \pi } \cdot \sigma} \cdot e^{-\frac{(x-\mu )^2}{2 \sigma ^2}}$$
+
 \begin{center}
   \begin{tabular}{r|r|r|r|r|r|r}
      type of peak & $k$     & $\Delta k$ & $\mu$   & $\Delta \mu$ & $\sigma$ & $\Delta \sigma$ \\ \hline
@@ -410,7 +419,9 @@ probability of a sumpeak to occur.
   name=first
 ]
     \addplot[blue, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-no-bg-calibrated.txt};
+    \addlegendentry{10cm Distance}
     \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-sum-no-bg-calibrated.txt};
+    \addlegendentry{10cm Distance}
 
 As evedient from figure 4.5, there is no sumpeak when the source is 10 cm away
 from the detector. However, the increased frequency of incident rays when the
@@ -436,10 +447,29 @@ source is placed directly on top of the detector leads to the formation of a sum
     \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/Na22-sum-no-bg-calibrated.txt};
 \end{axis}
 \end{tikzpicture}
-\captionof{figure}{}
+\captionof{figure}{Spectrum of $^{22}Na$ with the source in a 10cm distance from
+the detector and directly on top of it. When placed directly on top of the
+detector, it registers some radioactive decays as happening simultaneously and
+adds the two energies together.}
 \end{figure}
 
 \subsection{$\beta^+$-branching ratio}
+Analogously to the conversion coefficient of $^{137}Cs$ we can calculate the
+$\beta^+$-branching ratio with 
+$$\eta = \frac{n_\beta}{n_{tot}} = \frac{\epsilon_{tot} R^{PT}_{tot} K_{tot}
+  F_\beta}{\epsilon_\beta R^{PT}_\beta K_\beta F_{tot}}$$
+
+
+\begin{center}
+  \begin{tabular}{r|r|r|r|r|}
+     Type of peak & $\epsilon$ & $K$ & $R^{PT}$ & $F$     \\ \hline
+     Annihilation & $0,022$    & $2$ & $0,6$    & $46825$ \\ \hline
+     Photo        & $0,017$    & $1$ & $0,37$   & $11847$ \\
+	\end{tabular}
+\end{center}
+
+With our measured data and the values from the experiment room we find that $\eta = 0,94$, whereas the literature value is $\eta = 0,9$.
+
 \subsection{Multiple event process}
 
 \section{Energy Resolution}
@@ -479,7 +509,7 @@ fitted through $E_\gamma$ (in $keV$) plotted over $\sqrt{E_\gamma}$ (in $\sqrt{k
         default
     ]
     \addplot[red, only marks, mark=x, mark size=4pt] table[x=X, y=Y] {data/fwhm.txt};
-    \addplot[green, mark=x, mark size=0pt, domain=0:40, thick] {27.1052 + 1.84225*x};
+    \addplot[green, mark=x, mark size=0pt, domain=4:38, samples=10, thick] {27.1052 + 1.84225*x};
     \end{axis}
     \end{tikzpicture}
     \captionof{figure}{Strong quadratic correlation between the FWHM and photon energy}
@@ -505,6 +535,7 @@ to $E_{eff}=0,610 keV$.
     default
 ]
 \addplot[red, only marks, mark=x, mark size=1pt] table[x index=0, y index=1] {data/background.txt};
+\addlegendentry{Background}
 \end{axis}
 \end{tikzpicture}
 \captionof{figure}{}
